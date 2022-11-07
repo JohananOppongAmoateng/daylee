@@ -12,7 +12,18 @@ class _SignUpPage extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: ,
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: const [
+          CircleAvatar(
+            radius: 48.0,
+            backgroundImage: AssetImage("images/daylee.jpg",),
+          )
+        ],
+      ),
     );
   }
 }
