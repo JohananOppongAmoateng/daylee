@@ -16,13 +16,52 @@ class _SignUpPage extends State<SignUpPage> {
         title: Text(widget.title),
       ),
       body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: const [
-          CircleAvatar(
+          children:  [
+           const CircleAvatar(
             radius: 48.0,
             backgroundImage: AssetImage("images/daylee.jpg",),
-          )
-        ],
+          ),
+
+         
+          Container(
+            padding: const EdgeInsets.all(10.0),
+            child: Column(children: const [
+
+               // Email Inputfield
+              TextField(
+            decoration: InputDecoration(
+            label: Text("Email"),
+
+              hintText: "name@example.com",
+          ),
+            keyboardType: TextInputType.emailAddress,
+          ),
+
+
+          TextField(decoration: InputDecoration(
+            label: Text("Age"),
+              hintText: "Age",
+          ),
+            keyboardType: TextInputType.number,
+          ),
+
+
+          TextField(decoration: InputDecoration(
+            label: Text("Gender"),
+              hintText: "Male",
+          ),
+            keyboardType: TextInputType.text,
+          ),
+
+          // TextButton(onPressed: null ,
+          // style: ButtonStyle(
+            
+          // ),
+          // child: Text("Sign Up")),
+
+          // ElevatedButton(onPressed: onPressed, child: child)
+            ]),
+          ),],
       ),
     );
   }
