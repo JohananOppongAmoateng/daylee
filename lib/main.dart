@@ -1,6 +1,7 @@
+import '/ui/signin.dart';
 import 'package:flutter/material.dart';
 
-import 'ui/signup.dart';
+
 
 void main() {
   runApp(const DayleeApp());
@@ -8,6 +9,7 @@ void main() {
 
 class DayleeApp extends StatelessWidget {
   const DayleeApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -15,7 +17,8 @@ class DayleeApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const SignUpPage(title: 'Daylee App'),
+      // home: const SignUpPage(title: 'Daylee App'),
+      home: const LoginScreen(),
     );
   }
 }
