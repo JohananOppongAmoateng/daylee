@@ -1,6 +1,8 @@
 import '/ui/signin.dart';
 import 'package:flutter/material.dart';
 
+import 'ui/signup.dart';
+
 
 
 void main() {
@@ -17,8 +19,8 @@ class DayleeApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      // home: const SignUpPage(title: 'Daylee App'),
-      home: const LoginScreen(),
+      home: const SignUpScreen(title: 'Daylee App'),
+      // home: const LoginScreen(),
     );
   }
 }
