@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import 'package:form_builder_validators/form_builder_validators.dart';
 // import 'package:form_builder_validators/form_builder_validators.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -9,6 +10,9 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreen extends State<LoginScreen>{
   final loginFormKey = GlobalKey<FormState>();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _ageController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +47,7 @@ class _LoginScreen extends State<LoginScreen>{
                 children: [
                // Email Inputfield
               TextFormField(
+                controller: _emailController,
             decoration: const InputDecoration(
               border: OutlineInputBorder(borderRadius: BorderRadius.all(
               Radius.circular(0.0)),
@@ -53,9 +58,17 @@ class _LoginScreen extends State<LoginScreen>{
               contentPadding: EdgeInsets.all(6.0)
           ),
             keyboardType: TextInputType.emailAddress,
+            validator: FormBuilderValidators.compose(
+              [
+                FormBuilderValidators.required(),
+                FormBuilderValidators.email(),
+              ]
+            ),
           ),
             Padding(padding: EdgeInsets.all(15)),
+
           TextFormField(
+            controller: _ageController,
             decoration: const InputDecoration(
               border: OutlineInputBorder(borderRadius: BorderRadius.all(
               Radius.circular(0.0)),
@@ -66,20 +79,33 @@ class _LoginScreen extends State<LoginScreen>{
               contentPadding: EdgeInsets.all(6.0)
           ),
             keyboardType: TextInputType.number,
+            validator: FormBuilderValidators.compose(
+              [
+                FormBuilderValidators.required(),
+                FormBuilderValidators.numeric(),
+              ]
+            ),
           ),
         Padding(padding: EdgeInsets.all(10)),
 
         TextFormField(
+          controller: _passwordController,
           decoration: InputDecoration(
             border: OutlineInputBorder(borderRadius: BorderRadius.all(
               Radius.circular(0.0)),
               borderSide: BorderSide(color: Colors.black,width: 1.0)
               ),
-            label: Text("Gender"),
-            hintText: "Gender",
+            label: Text("Password"),
+            hintText: "Password",
               contentPadding: EdgeInsets.all(6.0)
           ),
             keyboardType: TextInputType.text,
+            validator: FormBuilderValidators.compose(
+              [
+                FormBuilderValidators.required(),
+                FormBuilderValidators.minLength(8),
+              ]
+            ),
           ),
         
 Padding(padding: EdgeInsets.all(15)),
