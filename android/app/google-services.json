@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "67954753743",
+    "project_id": "daylee-e3f05",
+    "storage_bucket": "daylee-e3f05.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:67954753743:android:bac2e5889a53af5c9e37ba",
+        "android_client_info": {
+          "package_name": "com.example.daylee"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "67954753743-s3bhn8btlp0r01iadqhdtjh4741ul3sf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCIFr0PEwh-gOHuCxZNpY6GVMuZRM93SW0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "67954753743-s3bhn8btlp0r01iadqhdtjh4741ul3sf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
