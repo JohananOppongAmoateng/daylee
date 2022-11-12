@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 
@@ -16,6 +17,8 @@ class _SignUpScreen extends State<SignUpScreen> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmpasswordController =
       TextEditingController();
+
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,7 +59,7 @@ class _SignUpScreen extends State<SignUpScreen> {
                   // Email Inputfield
                   TextFormField(
                     controller: _emailController,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(0.0)),
                           borderSide: BorderSide(width: 1.0)),
@@ -74,12 +77,12 @@ class _SignUpScreen extends State<SignUpScreen> {
                       FormBuilderValidators.email(),
                     ]),
                   ),
-                  Padding(
+                  const Padding(
                     padding: EdgeInsets.all(10.0),
                   ),
                   TextFormField(
                       controller: _ageController,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         border: OutlineInputBorder(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(0.0)),
@@ -98,12 +101,13 @@ class _SignUpScreen extends State<SignUpScreen> {
                         FormBuilderValidators.required(),
                         FormBuilderValidators.numeric(),
                       ])),
-                  Padding(
+                  const Padding(
                     padding: EdgeInsets.all(10.0),
                   ),
+                  
                   TextFormField(
                     controller: _passwordController,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(0.0)),
                           borderSide: BorderSide(width: 1.0)),
@@ -123,12 +127,12 @@ class _SignUpScreen extends State<SignUpScreen> {
                     ]),
                   ),
 
-                  Padding(
+                  const Padding(
                     padding: EdgeInsets.all(10.0),
                   ),
                   TextFormField(
                     controller: _confirmpasswordController,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(0.0)),
                           borderSide: BorderSide(width: 1.0)),
@@ -149,15 +153,16 @@ class _SignUpScreen extends State<SignUpScreen> {
                     ]),
                   ),
 
-                  Padding(
+                  const Padding(
                     padding: EdgeInsets.all(15.0),
                   ),
                   TextButton(
-                    // ignore: avoid_print
                     onPressed: () {
-                      print("Sign Up");
+                      if (signupFormKey.currentState!.validate()) {
+                        _signUpwithEmailandPassword(_emailController.text,_passwordController.text);
+                      }
                     },
-                    child: Text(
+                    child: const Text(
                       "Sign Up",
                       style: TextStyle(
                         color: Colors.white,
@@ -165,7 +170,7 @@ class _SignUpScreen extends State<SignUpScreen> {
                     ),
                     style: TextButton.styleFrom(
                         backgroundColor: Colors.pink,
-                        fixedSize: Size(350.0, 20.0)),
+                        fixedSize: const Size(350.0, 20.0)),
                   )
                 ]),
               )),
@@ -184,5 +189,24 @@ class _SignUpScreen extends State<SignUpScreen> {
         ],
       ),
     );
+  }
+
+
+  Future _signUpwithEmailandPassword(String email, String password) async {
+    try {
+    final credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+    email: email,
+    password: password,
+  );
+} on FirebaseAuthException catch (e) {
+  if (e.code == 'weak-password') {
+    print('The password provided is too weak.');
+  } else if (e.code == 'email-already-in-use') {
+    print('The account already exists for that email.');
+  }
+} catch (e) {
+  print(e);
+}
+
   }
 }

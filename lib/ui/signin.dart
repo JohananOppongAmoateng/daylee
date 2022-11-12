@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 // import 'package:form_builder_validators/form_builder_validators.dart';
 
@@ -108,8 +109,13 @@ class _LoginScreen extends State<LoginScreen>{
             ),
           ),
         
-Padding(padding: EdgeInsets.all(15)),
-        TextButton(onPressed: null, child: Text('Log In',
+        Padding(padding: EdgeInsets.all(15)),
+
+        TextButton(onPressed: (){
+          if (loginFormKey.currentState!.validate()) {
+                        _loginwithEmailandPassword(_emailController.text,_passwordController.text);
+        }
+        }, child: Text('Log In',
         style: TextStyle(color: Colors.white),
        ),
         style: TextButton.styleFrom(
@@ -123,5 +129,21 @@ Padding(padding: EdgeInsets.all(15)),
       ),
       ),])
     );
+  }
+  
+  Future _loginwithEmailandPassword(String email,String password) async{
+try {
+  final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+    email: email,
+    password: password
+  );
+} on FirebaseAuthException catch (e) {
+  if (e.code == 'user-not-found') {
+    print('No user found for that email.');
+  } else if (e.code == 'wrong-password') {
+    print('Wrong password provided for that user.');
+  }
+}
+
   }
 }
