@@ -18,7 +18,6 @@ class _SignUpScreen extends State<SignUpScreen> {
   final TextEditingController _confirmpasswordController =
       TextEditingController();
 
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -104,7 +103,7 @@ class _SignUpScreen extends State<SignUpScreen> {
                   const Padding(
                     padding: EdgeInsets.all(10.0),
                   ),
-                  
+
                   TextFormField(
                     controller: _passwordController,
                     decoration: const InputDecoration(
@@ -159,7 +158,8 @@ class _SignUpScreen extends State<SignUpScreen> {
                   TextButton(
                     onPressed: () {
                       if (signupFormKey.currentState!.validate()) {
-                        _signUpwithEmailandPassword(_emailController.text,_passwordController.text);
+                        _signUpwithEmailandPassword(
+                            _emailController.text, _passwordController.text);
                       }
                     },
                     child: const Text(
@@ -191,22 +191,47 @@ class _SignUpScreen extends State<SignUpScreen> {
     );
   }
 
-
   Future _signUpwithEmailandPassword(String email, String password) async {
     try {
-    final credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-    email: email,
-    password: password,
-  );
-} on FirebaseAuthException catch (e) {
-  if (e.code == 'weak-password') {
-    print('The password provided is too weak.');
-  } else if (e.code == 'email-already-in-use') {
-    print('The account already exists for that email.');
-  }
-} catch (e) {
-  print(e);
-}
-
+      final credential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: const Text('Weak Password'),
+            duration: const Duration(milliseconds: 1500),
+            width: 280.0, // Width of the SnackBar.
+            padding: const EdgeInsets.symmetric(
+              horizontal: 8.0, // Inner padding for SnackBar content.
+            ),
+            behavior: SnackBarBehavior.floating,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10.0),
+            ),
+          ),
+        );
+      } else if (e.code == 'email-already-in-use') {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: const Text('The account already exists for that email.'),
+            duration: const Duration(milliseconds: 3000),
+            width: 280.0, // Width of the SnackBar.
+            padding: const EdgeInsets.symmetric(
+              horizontal: 8.0, // Inner padding for SnackBar content.
+            ),
+            behavior: SnackBarBehavior.floating,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10.0),
+            ),
+          ),
+        );
+      }
+    } catch (e) {
+      print(e);
+    }
   }
 }
