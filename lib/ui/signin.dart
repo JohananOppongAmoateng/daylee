@@ -139,9 +139,35 @@ try {
   );
 } on FirebaseAuthException catch (e) {
   if (e.code == 'user-not-found') {
-    print('No user found for that email.');
+    ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: const Text('No user found for that email.'),
+            duration: const Duration(milliseconds: 3000),
+            width: 280.0, // Width of the SnackBar.
+            padding: const EdgeInsets.symmetric(
+              horizontal: 8.0, // Inner padding for SnackBar content.
+            ),
+            behavior: SnackBarBehavior.floating,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10.0),
+            ),
+          ),
+        );
   } else if (e.code == 'wrong-password') {
-    print('Wrong password provided for that user.');
+    ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: const Text('Wrong password provided for that user.'),
+            duration: const Duration(milliseconds: 3000),
+            width: 280.0, // Width of the SnackBar.
+            padding: const EdgeInsets.symmetric(
+              horizontal: 8.0, // Inner padding for SnackBar content.
+            ),
+            behavior: SnackBarBehavior.floating,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10.0),
+            ),
+          ),
+        );
   }
 }
 
